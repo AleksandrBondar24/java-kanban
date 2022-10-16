@@ -1,10 +1,23 @@
 package domain;
 
 public class Task {
-    protected int idTask;
-    protected String nameTask;
-    protected String statusTask;
-    protected String descriptionTask;
+    private int idTask;
+    private String nameTask;
+    private String statusTask;
+    private String descriptionTask;
+
+    public Task(String nameTask, String statusTask, String descriptionTask) {
+        this.nameTask = nameTask;
+        this.statusTask = statusTask;
+        this.descriptionTask = descriptionTask;
+    }
+
+    public Task(int idTask, String nameTask, String statusTask, String descriptionTask) {
+        this.idTask = idTask;
+        this.nameTask = nameTask;
+        this.statusTask = statusTask;
+        this.descriptionTask = descriptionTask;
+    }
 
     public Task(String nameTask, String descriptionTask) {
         this.nameTask = nameTask;
