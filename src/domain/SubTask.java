@@ -3,16 +3,14 @@ package domain;
 public class SubTask extends Task {
     private int epicTaskId;
 
-    public SubTask(int idTask, String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
-        super(idTask, nameTask, descriptionTask);
+    public SubTask(String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
+        super(nameTask, statusTask, descriptionTask);
         this.epicTaskId = epicTaskId;
-        this.statusTask = statusTask;
     }
 
-    public SubTask(String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
-        super(nameTask, descriptionTask);
+    public SubTask(int idTask, String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
+        super(idTask, nameTask, statusTask, descriptionTask);
         this.epicTaskId = epicTaskId;
-        this.statusTask = statusTask;
     }
 
     public void setEpicTaskId(int epicTaskId) {
@@ -27,10 +25,10 @@ public class SubTask extends Task {
     public String toString() {
         return "SubTask{" +
                 "epicTaskId=" + epicTaskId +
-                ", idTask=" + idTask +
-                ", nameTask='" + nameTask + '\'' +
-                ", statusTask='" + statusTask + '\'' +
-                ", descriptionTask='" + descriptionTask + '\'' +
+                ", idTask=" + getIdTask() +
+                ", nameTask='" + getNameTask() + '\'' +
+                ", statusTask='" + getStatusTask() + '\'' +
+                ", descriptionTask='" + getDescriptionTask() + '\'' +
                 '}';
     }
 }
