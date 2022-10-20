@@ -28,7 +28,7 @@ public class EpicTask extends Task {
         return "EpicTask{" +
                 "idTask=" + getIdTask() +
                 ", nameTask='" + getNameTask() + '\'' +
-                ", statusTask='" + getStatusTask() + '\'' +
+                ", statusTask='" + getStatus() + '\'' +
                 ", descriptionTask='" + getDescriptionTask() + '\'' +
                 '}';
     }

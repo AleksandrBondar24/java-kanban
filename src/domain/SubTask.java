@@ -3,13 +3,13 @@ package domain;
 public class SubTask extends Task {
     private int epicTaskId;
 
-    public SubTask(String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
-        super(nameTask, statusTask, descriptionTask);
+    public SubTask(String nameTask, Status status, String descriptionTask, int epicTaskId) {
+        super(nameTask, status, descriptionTask);
         this.epicTaskId = epicTaskId;
     }
 
-    public SubTask(int idTask, String nameTask, String statusTask, String descriptionTask, int epicTaskId) {
-        super(idTask, nameTask, statusTask, descriptionTask);
+    public SubTask(int idTask, String nameTask, Status status, String descriptionTask, int epicTaskId) {
+        super(idTask, nameTask, status, descriptionTask);
         this.epicTaskId = epicTaskId;
     }
 
@@ -27,7 +27,7 @@ public class SubTask extends Task {
                 "epicTaskId=" + epicTaskId +
                 ", idTask=" + getIdTask() +
                 ", nameTask='" + getNameTask() + '\'' +
-                ", statusTask='" + getStatusTask() + '\'' +
+                ", statusTask='" + getStatus() + '\'' +
                 ", descriptionTask='" + getDescriptionTask() + '\'' +
                 '}';
     }

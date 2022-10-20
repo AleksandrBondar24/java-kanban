@@ -3,33 +3,33 @@ package domain;
 public class Task {
     private int idTask;
     private String nameTask;
-    private String statusTask;
+    private Status status;
     private String descriptionTask;
 
-    public Task(String nameTask, String statusTask, String descriptionTask) {
+    public Task(String nameTask, Status status, String descriptionTask) {
         this.nameTask = nameTask;
-        this.statusTask = statusTask;
+        this.status = status;
         this.descriptionTask = descriptionTask;
     }
 
-    public Task(int idTask, String nameTask, String statusTask, String descriptionTask) {
+    public Task(int idTask, String nameTask, Status status, String descriptionTask) {
         this.idTask = idTask;
         this.nameTask = nameTask;
-        this.statusTask = statusTask;
+        this.status = status;
         this.descriptionTask = descriptionTask;
     }
 
     public Task(String nameTask, String descriptionTask) {
         this.nameTask = nameTask;
         this.descriptionTask = descriptionTask;
-        this.statusTask = "NEW";
+        this.status = Status.NEW;
     }
 
     public Task(int idTask, String nameTask, String descriptionTask) {
         this.idTask = idTask;
         this.nameTask = nameTask;
         this.descriptionTask = descriptionTask;
-        this.statusTask = "NEW";
+        this.status = Status.NEW;
     }
 
     public int getIdTask() {
@@ -40,10 +40,9 @@ public class Task {
         return nameTask;
     }
 
-    public String getStatusTask() {
-        return statusTask;
+    public Status getStatus() {
+        return status;
     }
-
     public String getDescriptionTask() {
         return descriptionTask;
     }
@@ -56,21 +55,19 @@ public class Task {
         this.nameTask = nameTask;
     }
 
-    public void setStatusTask(String statusTask) {
-        this.statusTask = statusTask;
+    public void setStatus(Status status) {
+        this.status = status;
     }
-
     public void setDescriptionTask(String descriptionTask) {
         this.descriptionTask = descriptionTask;
     }
-
 
     @Override
     public String toString() {
         return "Task{" +
                 "idTask=" + idTask +
                 ", nameTask='" + nameTask + '\'' +
-                ", statusTask='" + statusTask + '\'' +
+                ", statusTask='" + status + '\'' +
                 ", descriptionTask='" + descriptionTask + '\'' +
                 '}';
     }
