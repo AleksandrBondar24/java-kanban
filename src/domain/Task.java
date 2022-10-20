@@ -67,7 +67,7 @@ public class Task {
         return "Task{" +
                 "idTask=" + idTask +
                 ", nameTask='" + nameTask + '\'' +
-                ", statusTask='" + status + '\'' +
+                ", status='" + status + '\'' +
                 ", descriptionTask='" + descriptionTask + '\'' +
                 '}';
     }
