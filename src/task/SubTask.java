@@ -1,4 +1,4 @@
-package domain;
+package task;
 
 public class SubTask extends Task {
     private int epicTaskId;
@@ -29,6 +29,6 @@ public class SubTask extends Task {
                 ", nameTask='" + getNameTask() + '\'' +
                 ", status='" + getStatus() + '\'' +
                 ", descriptionTask='" + getDescriptionTask() + '\'' +
-                '}';
+                '}'+ "\n";
     }
 }

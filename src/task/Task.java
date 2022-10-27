@@ -1,4 +1,4 @@
-package domain;
+package task;
 
 public class Task {
     private int idTask;
@@ -69,6 +69,6 @@ public class Task {
                 ", nameTask='" + nameTask + '\'' +
                 ", status='" + status + '\'' +
                 ", descriptionTask='" + descriptionTask + '\'' +
-                '}';
+                '}'+ "\n";
     }
 }

@@ -1,9 +1,10 @@
-package domain;
+package task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EpicTask extends Task {
-    private final ArrayList<Integer> subTaskIds;
+    private final List<Integer> subTaskIds;
 
     public EpicTask(int idTask, String nameTask, String descriptionTask) {
         super(idTask, nameTask, descriptionTask);
@@ -19,7 +20,7 @@ public class EpicTask extends Task {
         subTaskIds.add(subTaskId);
     }
 
-    public ArrayList<Integer> getListSubTaskIds() {
+    public List<Integer> getListSubTaskIds() {
         return subTaskIds;
     }
 
@@ -30,6 +31,7 @@ public class EpicTask extends Task {
                 ", nameTask='" + getNameTask() + '\'' +
                 ", status='" + getStatus() + '\'' +
                 ", descriptionTask='" + getDescriptionTask() + '\'' +
-                '}';
+                "subTaskIds=" + subTaskIds +
+                '}' + "\n";
     }
 }
