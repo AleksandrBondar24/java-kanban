@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import manager.HistoryManager;
 import manager.InMemoryHistoryManager;
