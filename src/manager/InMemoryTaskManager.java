@@ -4,12 +4,9 @@ import task.EpicTask;
 import task.Status;
 import task.SubTask;
 import task.Task;
-import utils.Managers;
+import util.Managers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
     private HistoryManager manager = Managers.getDefaultHistory();
@@ -20,7 +17,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Task> getHistory() {
-        return new ArrayList<>(manager.getHistory());
+        return new LinkedList<>(manager.getHistory());
     }
 
     @Override
@@ -87,17 +84,17 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public ArrayList<Task> getListTasks() {
+    public List<Task> getListTasks() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public ArrayList<EpicTask> getListEpicTasks() {
+    public List<EpicTask> getListEpicTasks() {
         return new ArrayList<>(epicTask.values());
     }
 
     @Override
-    public ArrayList<SubTask> getListSubTasks() {
+    public List<SubTask> getListSubTasks() {
         return new ArrayList<>(subTask.values());
     }
 
