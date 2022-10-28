@@ -28,11 +28,11 @@ public interface TaskManager {
 
     SubTask getSubTask(SubTask task);
 
-    ArrayList<Task> getListTasks();
+    List<Task> getListTasks();
 
-    ArrayList<EpicTask> getListEpicTasks();
+    List<EpicTask> getListEpicTasks();
 
-    ArrayList<SubTask> getListSubTasks();
+    List<SubTask> getListSubTasks();
 
     void addTask(Task task);
 
