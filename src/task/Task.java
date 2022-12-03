@@ -5,31 +5,18 @@ public class Task {
     private String nameTask;
     private Status status;
     private String descriptionTask;
+    private Type type;
+    private int epicTaskId;
 
-    public Task(String nameTask, Status status, String descriptionTask) {
-        this.nameTask = nameTask;
-        this.status = status;
-        this.descriptionTask = descriptionTask;
+    public Task() {
     }
 
-    public Task(int idTask, String nameTask, Status status, String descriptionTask) {
+    public Task(int idTask, Type type, String nameTask, Status status, String descriptionTask) {
         this.idTask = idTask;
         this.nameTask = nameTask;
         this.status = status;
         this.descriptionTask = descriptionTask;
-    }
-
-    public Task(String nameTask, String descriptionTask) {
-        this.nameTask = nameTask;
-        this.descriptionTask = descriptionTask;
-        this.status = Status.NEW;
-    }
-
-    public Task(int idTask, String nameTask, String descriptionTask) {
-        this.idTask = idTask;
-        this.nameTask = nameTask;
-        this.descriptionTask = descriptionTask;
-        this.status = Status.NEW;
+        this.type = type;
     }
 
     public int getIdTask() {
@@ -43,6 +30,7 @@ public class Task {
     public Status getStatus() {
         return status;
     }
+
     public String getDescriptionTask() {
         return descriptionTask;
     }
@@ -58,8 +46,25 @@ public class Task {
     public void setStatus(Status status) {
         this.status = status;
     }
+
     public void setDescriptionTask(String descriptionTask) {
         this.descriptionTask = descriptionTask;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public int getEpicTaskId() {
+        return epicTaskId;
+    }
+
+    public void setEpicTaskId(int epictaskId) {
+        this.epicTaskId = epicTaskId;
     }
 
     @Override
@@ -69,6 +74,6 @@ public class Task {
                 ", nameTask='" + nameTask + '\'' +
                 ", status='" + status + '\'' +
                 ", descriptionTask='" + descriptionTask + '\'' +
-                '}'+ "\n";
+                '}';
     }
 }

@@ -1,0 +1,9 @@
+id,type,name,status,description,epic
+1,TASK,TZ,NEW,закончить ТЗ
+2,TASK,TZ2,NEW,закончить ТЗ4
+6,TASK,TZ6,NEW,закончить ТЗ6
+3,EPICTASK,TZ2,IN_PROGRESS,закончить ТЗ5
+4,SUBTASK,TZ3,DONE,закончить ТЗ27,3
+5,SUBTASK,TZ3,NEW,закончить ТЗ278,3
+
+2,4,5,3,6,1

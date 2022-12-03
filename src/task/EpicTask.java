@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EpicTask extends Task {
-    private final List<Integer> subTaskIds;
+    private final List<Integer> subTaskIds = new ArrayList<>();
 
-    public EpicTask(int idTask, String nameTask, String descriptionTask) {
-        super(idTask, nameTask, descriptionTask);
-        subTaskIds = new ArrayList<>();
+    public EpicTask() {
     }
 
-    public EpicTask(String nameTask, String descriptionTask) {
-        super(nameTask, descriptionTask);
-        subTaskIds = new ArrayList<>();
+    public EpicTask(int idTask, Type type, String nameTask, Status status, String descriptionTask) {
+        super(idTask, type, nameTask, status, descriptionTask);
     }
 
     public void addSubTaskId(int subTaskId) {
@@ -32,6 +29,6 @@ public class EpicTask extends Task {
                 ", status='" + getStatus() + '\'' +
                 ", descriptionTask='" + getDescriptionTask() + '\'' +
                 "subTaskIds=" + subTaskIds +
-                '}' + "\n";
+                '}';
     }
 }
