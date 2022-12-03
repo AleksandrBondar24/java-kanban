@@ -23,23 +23,19 @@ public class TaskFormatter {
 
     public static Task fromString(String value) {
         String[] tasks = value.split(",");
-        String examle1 = tasks[0];
-        String examle2 = tasks[1];
-        String examle3 = tasks[2];
-        String examle4 = tasks[3];
-        String examle5 = tasks[4];
+        int idTask = Integer.parseInt(tasks[0]);
+        String name = tasks[2];
+        Status status = Status.valueOf(tasks[3]);
+        String description = tasks[4];
         Type type = Type.valueOf(tasks[1]);
         switch (type) {
             case TASK:
-                return new Task(Integer.parseInt(examle1), Type.valueOf(examle2), examle3, Status.valueOf(examle4),
-                        examle5);
+                return new Task(idTask, type, name, status, description);
             case EPICTASK:
-                return new EpicTask(Integer.parseInt(examle1), Type.valueOf(examle2), examle3,
-                        Status.valueOf(examle4), examle5);
+                return new EpicTask(idTask, type, name, status, description);
             case SUBTASK:
-                String examle6 = tasks[5];
-                return new SubTask(Integer.parseInt(examle1), Type.valueOf(examle2), examle3,
-                        Status.valueOf(examle4), examle5, Integer.parseInt(examle6));
+                int idEpic = Integer.parseInt(tasks[5]);
+                return new SubTask(idTask, type, name, status, description, idEpic);
         }
         return null;
     }
@@ -47,14 +43,12 @@ public class TaskFormatter {
     public static String historyToString(HistoryManager manager) {
         List<Task> historys = manager.getHistory();
         StringBuilder histor = new StringBuilder();
-        int count = 1;
-        for (Task key : historys) {
-            if (historys.size() == count) {
-                histor.append(key.getIdTask());
+        for (int i = 0; i < historys.size(); i++) {
+            if (i == historys.size() - 1) {
+                histor.append(historys.get(i).getIdTask());
             } else {
-                histor.append(key.getIdTask()).append(",");
+                histor.append(historys.get(i).getIdTask()).append(",");
             }
-            count++;
         }
         return histor.toString();
     }
