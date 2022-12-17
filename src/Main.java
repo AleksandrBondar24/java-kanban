@@ -6,7 +6,7 @@ import java.io.File;
 
 public class Main {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         File file = new File("taskManagerMain.csv");
         TaskManager manager = Managers.getDefault(file);
         Task task = new Task(-1, Type.TASK, "Уборка", Status.NEW, "Помыть полы и пропылесосить");
@@ -50,5 +50,5 @@ public class Main {
         System.out.println(manager.getHistory());
         manager.removeEpicTask(task2);
         System.out.println(manager.getHistory());
-    }
+    }*/
 }

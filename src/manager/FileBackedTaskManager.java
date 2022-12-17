@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
@@ -24,6 +25,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task.setNameTask("TZ");
         task.setStatus(Status.NEW);
         task.setDescriptionTask("закончить ТЗ");
+        task.setStartTime(2022,12,16,22,30);
+        task.setDuration(56);
         manager.addTask(task);
         manager.getTask(task.getIdTask());
 
@@ -32,6 +35,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task2.setNameTask("TZ2");
         task2.setStatus(Status.NEW);
         task2.setDescriptionTask("закончить ТЗ4");
+        task2.setStartTime(2022,11,16,22,35);
+        task2.setDuration(44);
         manager.addTask(task2);
         manager.getTask(task2.getIdTask());
 
@@ -48,6 +53,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask.setStatus(Status.DONE);
         subTask.setDescriptionTask("закончить ТЗ27");
         subTask.setEpicTaskId(epicTask.getIdTask());
+        subTask.setStartTime(2022,10,16,23,35);
+        subTask.setDuration(40);
         manager.addSubTask(subTask);
         manager.getSubTask(subTask.getIdTask());
         manager.getEpicTask(epicTask.getIdTask());
@@ -58,6 +65,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask1.setStatus(Status.NEW);
         subTask1.setDescriptionTask("закончить ТЗ278");
         subTask1.setEpicTaskId(epicTask.getIdTask());
+        subTask1.setStartTime(2022,9,28,21,35);
+        subTask1.setDuration(38);
         manager.addSubTask(subTask1);
         manager.getSubTask(subTask1.getIdTask());
         manager.getEpicTask(epicTask.getIdTask());
@@ -67,14 +76,18 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task3.setNameTask("TZ6");
         task3.setStatus(Status.NEW);
         task3.setDescriptionTask("закончить ТЗ6");
+        task3.setStartTime(2022,5,11,22,35);
+        task3.setDuration(49);
         manager.addTask(task3);
         manager.getTask(task3.getIdTask());
         manager.getTask(task.getIdTask());
+
         System.out.println(manager.getListTasks());
         System.out.println(manager.getListSubTasks());
         System.out.println(manager.getListEpicTasks());
         System.out.println(manager.getHistory());
         System.out.println(" ");
+        System.out.println(manager.getPrioritizedTasks());
 
         TaskManager manager1 = loadFromFile(file);
 
@@ -82,6 +95,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         System.out.println(manager1.getListSubTasks());
         System.out.println(manager1.getListEpicTasks());
         System.out.println(manager1.getHistory());
+        System.out.println(manager.getPrioritizedTasks());
+
     }
 
     private final File file;
@@ -100,43 +115,45 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             int id = 0;
             System.out.println(csvTasFile);
             System.out.println(" ");
+            List<Integer> idHistory = new ArrayList<>();
             for (int i = 1; i < strings.length; i++) {
                 if (strings[i].isBlank()) {
 
-                    List<Integer> idHistory = TaskFormatter.historyFromString(strings[++i]);
-
-                    for (Integer idList : idHistory) {
-
-                        if (fileManager.tasks.containsKey(idList)) {
-                            fileManager.history.add(fileManager.tasks.get(idList));
-                        } else if (fileManager.epicTask.containsKey(idList)) {
-                            fileManager.history.add(fileManager.epicTask.get(idList));
-                        } else if (fileManager.subTask.containsKey(idList)) {
-                            fileManager.history.add(fileManager.subTask.get(idList));
-                        }
-                    }
-                } else {
-                    Task task = TaskFormatter.fromString(strings[i]);
-                    assert task != null;
-                    Type type = task.getType();
-                    switch (type) {
-                        case TASK:
-                            fileManager.tasks.put(task.getIdTask(), task);
-                            break;
-                        case EPICTASK:
-                            fileManager.epicTask.put(task.getIdTask(), (EpicTask) task);
-                            break;
-                        case SUBTASK:
-                            fileManager.subTask.put(task.getIdTask(), (SubTask) task);
-                            break;
-                    }
-
-                    if (task.getIdTask() > id) {
-                        id = task.getIdTask();
-                    }
+                    idHistory = TaskFormatter.historyFromString(strings[++i]);
+                    break;
+                }
+                Task task = TaskFormatter.fromString(strings[i]);
+                assert task != null;
+                Type type = task.getType();
+                switch (type) {
+                    case TASK:
+                        fileManager.tasks.put(task.getIdTask(), task);
+                        fileManager.prioritizedTasks.add(task);
+                        break;
+                    case EPICTASK:
+                        fileManager.epicTask.put(task.getIdTask(), (EpicTask) task);
+                        break;
+                    case SUBTASK:
+                        fileManager.subTask.put(task.getIdTask(), (SubTask) task);
+                        fileManager.prioritizedTasks.add(task);
+                        break;
                 }
 
+                if (task.getIdTask() > id) {
+                    id = task.getIdTask();
+                }
             }
+            for (Integer idList : idHistory) {
+
+                if (fileManager.tasks.containsKey(idList)) {
+                    fileManager.history.add(fileManager.tasks.get(idList));
+                } else if (fileManager.epicTask.containsKey(idList)) {
+                    fileManager.history.add(fileManager.epicTask.get(idList));
+                } else if (fileManager.subTask.containsKey(idList)) {
+                    fileManager.history.add(fileManager.subTask.get(idList));
+                }
+            }
+
             for (SubTask taskas : fileManager.subTask.values()) {
                 int idThisEpic = taskas.getEpicTaskId();
                 EpicTask taskasa = fileManager.epicTask.get(idThisEpic);

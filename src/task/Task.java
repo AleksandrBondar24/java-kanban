@@ -1,5 +1,8 @@
 package task;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Task {
     private int idTask;
     private String nameTask;
@@ -7,16 +10,41 @@ public class Task {
     private String descriptionTask;
     private Type type;
     private int epicTaskId;
+    private Duration duration;
+    private LocalDateTime startTime ;
+
+
+    public void setDuration(long hours) {
+        this.duration = Duration.ofHours(hours);
+    }
+
+    public void setStartTime(int year, int month, int day, int hours, int minutes) {
+        this.startTime = LocalDateTime.of(year, month, day, hours, minutes);
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime.plus(duration);
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
 
     public Task() {
     }
 
-    public Task(int idTask, Type type, String nameTask, Status status, String descriptionTask) {
+    public Task(int idTask, Type type, String nameTask, Status status, String descriptionTask, LocalDateTime startTime, Duration duration) {
         this.idTask = idTask;
         this.nameTask = nameTask;
         this.status = status;
         this.descriptionTask = descriptionTask;
         this.type = type;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public int getIdTask() {
@@ -72,8 +100,12 @@ public class Task {
         return "Task{" +
                 "idTask=" + idTask +
                 ", nameTask='" + nameTask + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", descriptionTask='" + descriptionTask + '\'' +
+                ", type=" + type +
+                ", epicTaskId=" + epicTaskId +
+                ", duration=" + duration +
+                ", startTime=" + startTime +
                 '}';
     }
 }

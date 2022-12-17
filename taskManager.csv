@@ -1,9 +1,9 @@
-id,type,name,status,description,epic
-1,TASK,TZ,NEW,закончить ТЗ
-2,TASK,TZ2,NEW,закончить ТЗ4
-6,TASK,TZ6,NEW,закончить ТЗ6
-3,EPICTASK,TZ2,IN_PROGRESS,закончить ТЗ5
-4,SUBTASK,TZ3,DONE,закончить ТЗ27,3
-5,SUBTASK,TZ3,NEW,закончить ТЗ278,3
+id,type,name,status,description,startTime,duration,epic
+1,TASK,TZ,NEW,закончить ТЗ,2022-12-16T22:30,PT56H
+2,TASK,TZ2,NEW,закончить ТЗ4,2022-11-16T22:35,PT44H
+6,TASK,TZ6,NEW,закончить ТЗ6,2022-05-11T22:35,PT49H
+3,EPICTASK,TZ2,IN_PROGRESS,закончить ТЗ5,2022-10-16T23:35,PT78H
+4,SUBTASK,TZ3,DONE,закончить ТЗ27,2022-10-16T23:35,PT40H,3
+5,SUBTASK,TZ3,NEW,закончить ТЗ278,2022-09-28T21:35,PT38H,3
 
 2,4,5,3,6,1
