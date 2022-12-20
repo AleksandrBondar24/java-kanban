@@ -5,15 +5,16 @@ import task.SubTask;
 import task.Task;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TaskManager {
     List<Task> getHistory();
 
-    void removeTask(Task task);
+    String removeTask(Task task);
 
-    void removeEpicTask(EpicTask task);
+    String removeEpicTask(EpicTask task);
 
-    void removeSubTask(SubTask task);
+    String removeSubTask(SubTask task);
 
     void clearTasks();
 
@@ -45,4 +46,8 @@ public interface TaskManager {
 
     void updateSubTasks(SubTask task);
     List<Task> getPrioritizedTasks();
+
+    void changeStatusEpicTask(EpicTask task);
+
+     Map<Integer,Task> getTasks();
 }

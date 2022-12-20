@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task.setNameTask("TZ");
         task.setStatus(Status.NEW);
         task.setDescriptionTask("закончить ТЗ");
-        task.setStartTime(2022,12,16,22,30);
-        task.setDuration(56);
+        task.setStartTime(2022,12,16,01,01);
+        Duration duration = Duration.ofHours(56);
+        task.setDuration(duration);
         manager.addTask(task);
         manager.getTask(task.getIdTask());
 
@@ -35,8 +37,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task2.setNameTask("TZ2");
         task2.setStatus(Status.NEW);
         task2.setDescriptionTask("закончить ТЗ4");
-        task2.setStartTime(2022,11,16,22,35);
-        task2.setDuration(44);
+        task2.setStartTime(2022,11,16,01,01);
+        Duration duration1 = Duration.ofHours(44);
+        task2.setDuration(duration1);
         manager.addTask(task2);
         manager.getTask(task2.getIdTask());
 
@@ -53,8 +56,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask.setStatus(Status.DONE);
         subTask.setDescriptionTask("закончить ТЗ27");
         subTask.setEpicTaskId(epicTask.getIdTask());
-        subTask.setStartTime(2022,10,16,23,35);
-        subTask.setDuration(40);
+        subTask.setStartTime(2022,10,16,01,01);
+        Duration duration2 = Duration.ofHours(40);
+        subTask.setDuration(duration2);
         manager.addSubTask(subTask);
         manager.getSubTask(subTask.getIdTask());
         manager.getEpicTask(epicTask.getIdTask());
@@ -65,8 +69,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask1.setStatus(Status.NEW);
         subTask1.setDescriptionTask("закончить ТЗ278");
         subTask1.setEpicTaskId(epicTask.getIdTask());
-        subTask1.setStartTime(2022,9,28,21,35);
-        subTask1.setDuration(38);
+        subTask1.setStartTime(2022,9,15,01,01);
+        Duration duration3 = Duration.ofHours(38);
+        subTask1.setDuration(duration3);
         manager.addSubTask(subTask1);
         manager.getSubTask(subTask1.getIdTask());
         manager.getEpicTask(epicTask.getIdTask());
@@ -76,8 +81,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task3.setNameTask("TZ6");
         task3.setStatus(Status.NEW);
         task3.setDescriptionTask("закончить ТЗ6");
-        task3.setStartTime(2022,5,11,22,35);
-        task3.setDuration(49);
+        task3.setStartTime(2022,5,11,01,01);
+        Duration duration4 = Duration.ofHours(49);
+        task3.setDuration(duration4);
         manager.addTask(task3);
         manager.getTask(task3.getIdTask());
         manager.getTask(task.getIdTask());
@@ -219,21 +225,24 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void removeTask(Task task) {
+    public String removeTask(Task task) {
         super.removeTask(task);
         save();
+        return "Задача успешно удалена!";
     }
 
     @Override
-    public void removeEpicTask(EpicTask task) {
+    public String removeEpicTask(EpicTask task) {
         super.removeEpicTask(task);
         save();
+        return "Задача успешно удалена!";
     }
 
     @Override
-    public void removeSubTask(SubTask task) {
+    public String removeSubTask(SubTask task) {
         super.removeSubTask(task);
         save();
+        return "Задача успешно удалена!";
     }
 
     @Override

@@ -5,24 +5,24 @@ import task.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//import static manager.InMemoryTaskManager.defaultDuration;
-import static manager.InMemoryTaskManager.defaultStartTime;
+import static task.Task.*;
+import static util.СreationOfTime.formatter;
+
 
 public class TaskFormatter {
     public static String toString(Task task) {
-        Optional<LocalDateTime> startTime = Optional.ofNullable(task.getStartTime());
-        Optional<Duration> duration = Optional.ofNullable(task.getDuration());
 
         if (!task.getType().equals(Type.SUBTASK)) {
             return task.getIdTask() + "," + task.getType() + "," + task.getNameTask() + "," + task.getStatus() + ","
-                    + task.getDescriptionTask() + "," + startTime.orElse(defaultStartTime) + "," + duration.orElse(Duration.ZERO);
+                    + task.getDescriptionTask() + "," + task.getStartTime().format(formatter) + "," + task.getDuration();
         }
         return task.getIdTask() + "," + task.getType() + "," + task.getNameTask() + "," + task.getStatus() + ","
-                + task.getDescriptionTask() + "," + startTime.orElse(defaultStartTime) + "," + duration.orElse(Duration.ZERO) + "," + task.getEpicTaskId();
+                + task.getDescriptionTask() + "," + task.getStartTime().format(formatter) + "," + task.getDuration() + "," + task.getEpicTaskId();
     }
 
     public static String getHeader() {
@@ -37,14 +37,8 @@ public class TaskFormatter {
         Status status = Status.valueOf(tasks[3]);
         String description = tasks[4];
         Type type = Type.valueOf(tasks[1]);
-        LocalDateTime startTime = LocalDateTime.parse(tasks[5]);
-        if (startTime.isEqual(defaultStartTime)) {
-            startTime = null;
-        }
+        ZonedDateTime startTime = ZonedDateTime.parse(tasks[5],formatter);
         Duration duration = Duration.parse((tasks[6]));
-        if (duration.equals(Duration.ZERO)) {
-            duration = null;
-        }
 
         switch (type) {
             case TASK:

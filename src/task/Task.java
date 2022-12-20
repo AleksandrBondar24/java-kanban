@@ -2,31 +2,39 @@ package task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+
+import static util.СreationOfTime.*;
 
 public class Task {
+
     private int idTask;
     private String nameTask;
     private Status status;
     private String descriptionTask;
     private Type type;
     private int epicTaskId;
-    private Duration duration;
-    private LocalDateTime startTime ;
+    private Duration duration = defaultDuration;
+    private ZonedDateTime startTime = defaultStartTime;
 
 
-    public void setDuration(long hours) {
-        this.duration = Duration.ofHours(hours);
+
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
     }
 
-    public void setStartTime(int year, int month, int day, int hours, int minutes) {
-        this.startTime = LocalDateTime.of(year, month, day, hours, minutes);
+    public void setStartTime(int year, int month, int day,int hours,int minutes) {
+        this.startTime = ZonedDateTime.of(LocalDateTime.of(year,month,day,hours,minutes),zoneId);
     }
 
-    public LocalDateTime getStartTime() {
+    public ZonedDateTime getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public ZonedDateTime getEndTime() {
         return startTime.plus(duration);
     }
 
@@ -37,7 +45,22 @@ public class Task {
     public Task() {
     }
 
-    public Task(int idTask, Type type, String nameTask, Status status, String descriptionTask, LocalDateTime startTime, Duration duration) {
+    public Task(int idTask, Status status) {
+        this.idTask = idTask;
+        this.status = status;
+    }
+
+    public Task(Status status, Duration duration, ZonedDateTime startTime) {
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
+
+    public Task(Status status) {
+        this.status = status;
+    }
+
+    public Task(int idTask, Type type, String nameTask, Status status, String descriptionTask, ZonedDateTime startTime, Duration duration) {
         this.idTask = idTask;
         this.nameTask = nameTask;
         this.status = status;
@@ -103,7 +126,6 @@ public class Task {
                 ", status=" + status +
                 ", descriptionTask='" + descriptionTask + '\'' +
                 ", type=" + type +
-                ", epicTaskId=" + epicTaskId +
                 ", duration=" + duration +
                 ", startTime=" + startTime +
                 '}';

@@ -2,39 +2,43 @@ package task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EpicTask extends Task {
     private final List<Integer> subTaskIds = new ArrayList<>();
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private ZonedDateTime startTime;
+    private ZonedDateTime endTime;
+    private Duration duration;
 
     public EpicTask() {
     }
-
-    public EpicTask(int idTask, Type type, String nameTask, Status status, String descriptionTask, LocalDateTime startTime, Duration duration) {
+    public EpicTask(int idTask, Type type, String nameTask, Status status, String descriptionTask, ZonedDateTime startTime, Duration duration) {
         super(idTask, type, nameTask, status, descriptionTask, startTime, duration);
 
     }
 
-    public void setStartTime(LocalDateTime localDateTime) {
-        this.startTime = localDateTime;
+    public void setStartTime(ZonedDateTime zonedDateTime) {
+        this.startTime = zonedDateTime;
     }
 
-    public void setEndTime(LocalDateTime localDateTime) {
-        this.endTime = localDateTime;
+    public void setEndTime(ZonedDateTime zonedDateTime) {
+        this.endTime = zonedDateTime;
+    }
+    public void setDuration(long hours) {
+        this.duration = Duration.ofHours(hours);
     }
 
 
     @Override
-    public LocalDateTime getStartTime() {
+    public ZonedDateTime getStartTime() {
         return startTime;
     }
 
     @Override
-    public LocalDateTime getEndTime() {
+    public ZonedDateTime getEndTime() {
         return endTime;
     }
 
@@ -58,4 +62,5 @@ public class EpicTask extends Task {
                 "subTaskIds=" + subTaskIds +
                 '}';
     }
+
 }
