@@ -4,13 +4,10 @@ import manager.HistoryManager;
 import task.*;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static task.Task.*;
 import static util.СreationOfTime.formatter;
 
 
@@ -37,17 +34,17 @@ public class TaskFormatter {
         Status status = Status.valueOf(tasks[3]);
         String description = tasks[4];
         Type type = Type.valueOf(tasks[1]);
-        ZonedDateTime startTime = ZonedDateTime.parse(tasks[5],formatter);
+        ZonedDateTime startTime = ZonedDateTime.parse(tasks[5], formatter);
         Duration duration = Duration.parse((tasks[6]));
 
         switch (type) {
             case TASK:
-                return new Task(idTask, type, name, status, description,startTime,duration);
+                return new Task(idTask, type, name, status, description, startTime, duration);
             case EPICTASK:
-                return new EpicTask(idTask, type, name, status, description,startTime,duration);
+                return new EpicTask(idTask, type, name, status, description, startTime, duration);
             case SUBTASK:
                 int idEpic = Integer.parseInt(tasks[7]);
-                return new SubTask(idTask, type, name, status, description,startTime,duration,idEpic);
+                return new SubTask(idTask, type, name, status, description, startTime, duration, idEpic);
         }
         return null;
     }

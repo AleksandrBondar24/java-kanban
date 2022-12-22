@@ -34,20 +34,33 @@ public interface TaskManager {
 
     List<SubTask> getListSubTasks();
 
-    void addTask(Task task);
+    String addTask(Task task);
 
-    void addEpicTask(EpicTask task);
+    String addEpicTask(EpicTask task);
 
-    void addSubTask(SubTask task);
+    String addSubTask(SubTask task);
 
-    void updateEpicTasks(EpicTask task);
+    String updateEpicTasks(EpicTask task);
 
-    void updateTasks(Task task);
+    String updateTasks(Task task);
 
-    void updateSubTasks(SubTask task);
+    String updateSubTasks(SubTask task);
+
     List<Task> getPrioritizedTasks();
 
     void changeStatusEpicTask(EpicTask task);
 
-     Map<Integer,Task> getTasks();
+    Map<Integer, Task> getTasks();
+
+    Map<Integer, EpicTask> getEpicTasks();
+
+    Map<Integer, SubTask> getSubTasks();
+
+    void setStartTimeEpic(EpicTask epicTask);
+
+    void setDurationEpic(EpicTask epicTask);
+
+    void checkIntersections(Task task1);
 }
+
+

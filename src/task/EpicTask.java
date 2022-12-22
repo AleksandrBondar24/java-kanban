@@ -1,7 +1,6 @@
 package task;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,15 @@ public class EpicTask extends Task {
 
     public EpicTask() {
     }
+
+    public EpicTask(Status status, Duration duration, ZonedDateTime startTime) {
+        super(status, duration, startTime);
+    }
+
     public EpicTask(int idTask, Type type, String nameTask, Status status, String descriptionTask, ZonedDateTime startTime, Duration duration) {
-        super(idTask, type, nameTask, status, descriptionTask, startTime, duration);
+        super(idTask, nameTask, status, descriptionTask, type);
+        this.startTime = startTime;
+        this.duration = duration;
 
     }
 
@@ -27,10 +33,15 @@ public class EpicTask extends Task {
     public void setEndTime(ZonedDateTime zonedDateTime) {
         this.endTime = zonedDateTime;
     }
+
     public void setDuration(long hours) {
         this.duration = Duration.ofHours(hours);
     }
 
+    @Override
+    public Duration getDuration() {
+        return duration;
+    }
 
     @Override
     public ZonedDateTime getStartTime() {

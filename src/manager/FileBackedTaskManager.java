@@ -26,7 +26,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task.setNameTask("TZ");
         task.setStatus(Status.NEW);
         task.setDescriptionTask("закончить ТЗ");
-        task.setStartTime(2022,12,16,01,01);
+        task.setStartTime(2022, 12, 16, 01, 01);
         Duration duration = Duration.ofHours(56);
         task.setDuration(duration);
         manager.addTask(task);
@@ -37,7 +37,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task2.setNameTask("TZ2");
         task2.setStatus(Status.NEW);
         task2.setDescriptionTask("закончить ТЗ4");
-        task2.setStartTime(2022,11,16,01,01);
+        task2.setStartTime(2022, 11, 16, 01, 01);
         Duration duration1 = Duration.ofHours(44);
         task2.setDuration(duration1);
         manager.addTask(task2);
@@ -56,7 +56,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask.setStatus(Status.DONE);
         subTask.setDescriptionTask("закончить ТЗ27");
         subTask.setEpicTaskId(epicTask.getIdTask());
-        subTask.setStartTime(2022,10,16,01,01);
+        subTask.setStartTime(2022, 10, 16, 01, 01);
         Duration duration2 = Duration.ofHours(40);
         subTask.setDuration(duration2);
         manager.addSubTask(subTask);
@@ -69,7 +69,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask1.setStatus(Status.NEW);
         subTask1.setDescriptionTask("закончить ТЗ278");
         subTask1.setEpicTaskId(epicTask.getIdTask());
-        subTask1.setStartTime(2022,9,15,01,01);
+        subTask1.setStartTime(2022, 9, 15, 01, 01);
         Duration duration3 = Duration.ofHours(38);
         subTask1.setDuration(duration3);
         manager.addSubTask(subTask1);
@@ -81,7 +81,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task3.setNameTask("TZ6");
         task3.setStatus(Status.NEW);
         task3.setDescriptionTask("закончить ТЗ6");
-        task3.setStartTime(2022,5,11,01,01);
+        task3.setStartTime(2022, 5, 11, 01, 01);
         Duration duration4 = Duration.ofHours(49);
         task3.setDuration(duration4);
         manager.addTask(task3);
@@ -94,6 +94,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         System.out.println(manager.getHistory());
         System.out.println(" ");
         System.out.println(manager.getPrioritizedTasks());
+        System.out.println(" ");
+
 
         TaskManager manager1 = loadFromFile(file);
 
@@ -134,14 +136,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 switch (type) {
                     case TASK:
                         fileManager.tasks.put(task.getIdTask(), task);
-                        fileManager.prioritizedTasks.add(task);
+                        fileManager.prioritizedTasks.put(task.getStartTime(), task);
                         break;
                     case EPICTASK:
-                        fileManager.epicTask.put(task.getIdTask(), (EpicTask) task);
+                        fileManager.epicTasks.put(task.getIdTask(), (EpicTask) task);
                         break;
                     case SUBTASK:
-                        fileManager.subTask.put(task.getIdTask(), (SubTask) task);
-                        fileManager.prioritizedTasks.add(task);
+                        fileManager.subTasks.put(task.getIdTask(), (SubTask) task);
+                        fileManager.prioritizedTasks.put(task.getStartTime(), task);
                         break;
                 }
 
@@ -153,16 +155,16 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
                 if (fileManager.tasks.containsKey(idList)) {
                     fileManager.history.add(fileManager.tasks.get(idList));
-                } else if (fileManager.epicTask.containsKey(idList)) {
-                    fileManager.history.add(fileManager.epicTask.get(idList));
-                } else if (fileManager.subTask.containsKey(idList)) {
-                    fileManager.history.add(fileManager.subTask.get(idList));
+                } else if (fileManager.epicTasks.containsKey(idList)) {
+                    fileManager.history.add(fileManager.epicTasks.get(idList));
+                } else if (fileManager.subTasks.containsKey(idList)) {
+                    fileManager.history.add(fileManager.subTasks.get(idList));
                 }
             }
 
-            for (SubTask taskas : fileManager.subTask.values()) {
+            for (SubTask taskas : fileManager.subTasks.values()) {
                 int idThisEpic = taskas.getEpicTaskId();
-                EpicTask taskasa = fileManager.epicTask.get(idThisEpic);
+                EpicTask taskasa = fileManager.epicTasks.get(idThisEpic);
                 List<Integer> list = taskasa.getListSubTaskIds();
                 list.add(taskas.getIdTask());
             }
@@ -184,12 +186,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 writer.write(csvToString);
                 writer.newLine();
             }
-            for (EpicTask epic : epicTask.values()) {
+            for (EpicTask epic : epicTasks.values()) {
                 String csvToString = TaskFormatter.toString(epic);
                 writer.write(csvToString);
                 writer.newLine();
             }
-            for (SubTask subTask : subTask.values()) {
+            for (SubTask subTask : subTasks.values()) {
                 String csvToString = TaskFormatter.toString(subTask);
                 writer.write(csvToString);
                 writer.newLine();
@@ -264,38 +266,44 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         super.addTask(task);
         save();
+        return "Задача успешно добавлена!";
     }
 
     @Override
-    public void addEpicTask(EpicTask task) {
+    public String addEpicTask(EpicTask task) {
         super.addEpicTask(task);
         save();
+        return "Эпикзадача успешно добавлена!";
     }
 
     @Override
-    public void addSubTask(SubTask task) {
+    public String addSubTask(SubTask task) {
         super.addSubTask(task);
         save();
+        return "Отсутствует эпик для этой подзадачи!";
     }
 
     @Override
-    public void updateEpicTasks(EpicTask task) {
+    public String updateEpicTasks(EpicTask task) {
         super.updateEpicTasks(task);
         save();
+        return "Задача успешно обновлена!";
     }
 
     @Override
-    public void updateTasks(Task task) {
+    public String updateTasks(Task task) {
         super.updateTasks(task);
         save();
+        return "Задача успешно обновлена!";
     }
 
     @Override
-    public void updateSubTasks(SubTask task) {
+    public String updateSubTasks(SubTask task) {
         super.updateSubTasks(task);
         save();
+        return "Задача успешно обновлена!";
     }
 }

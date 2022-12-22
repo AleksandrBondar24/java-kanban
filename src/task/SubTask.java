@@ -9,18 +9,18 @@ public class SubTask extends Task {
     public SubTask() {
     }
 
-    public SubTask(Status status,Duration duration, ZonedDateTime startTime, int epicTaskId) {
+    public SubTask(Status status, Duration duration, ZonedDateTime startTime, int epicTaskId) {
         super(status, duration, startTime);
         this.epicTaskId = epicTaskId;
     }
 
-    public SubTask(Status status, int epicTaskId) {
-        super(status);
+    public SubTask(int id, Status status, Duration duration, ZonedDateTime startTime, int epicTaskId) {
+        super(id, status, duration, startTime);
         this.epicTaskId = epicTaskId;
     }
 
     public SubTask(int idTask, Type type, String nameTask, Status status, String descriptionTask, ZonedDateTime startTime, Duration duration, int epicTaskId) {
-        super(idTask, type, nameTask, status, descriptionTask,startTime,duration);
+        super(idTask, type, nameTask, status, descriptionTask, startTime, duration);
         this.epicTaskId = epicTaskId;
     }
 

@@ -4,7 +4,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static util.СreationOfTime.*;
 
@@ -20,37 +19,25 @@ public class Task {
     private ZonedDateTime startTime = defaultStartTime;
 
 
-
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    public void setStartTime(int year, int month, int day,int hours,int minutes) {
-        this.startTime = ZonedDateTime.of(LocalDateTime.of(year,month,day,hours,minutes),zoneId);
-    }
-
-    public ZonedDateTime getStartTime() {
-        return startTime;
-    }
-
-    public ZonedDateTime getEndTime() {
-        return startTime.plus(duration);
-    }
-
-    public Duration getDuration() {
-        return duration;
-    }
-
     public Task() {
     }
 
-    public Task(int idTask, Status status) {
+    public Task(int idTask, String nameTask, Status status, String descriptionTask, Type type) {
         this.idTask = idTask;
+        this.nameTask = nameTask;
         this.status = status;
+        this.descriptionTask = descriptionTask;
+        this.type = type;
     }
 
     public Task(Status status, Duration duration, ZonedDateTime startTime) {
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
+
+    public Task(int id, Status status, Duration duration, ZonedDateTime startTime) {
+        this.idTask = id;
         this.status = status;
         this.duration = duration;
         this.startTime = startTime;
@@ -68,6 +55,26 @@ public class Task {
         this.type = type;
         this.startTime = startTime;
         this.duration = duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public void setStartTime(int year, int month, int day, int hours, int minutes) {
+        this.startTime = ZonedDateTime.of(LocalDateTime.of(year, month, day, hours, minutes), zoneId);
+    }
+
+    public ZonedDateTime getStartTime() {
+        return startTime;
+    }
+
+    public ZonedDateTime getEndTime() {
+        return startTime.plus(duration);
+    }
+
+    public Duration getDuration() {
+        return duration;
     }
 
     public int getIdTask() {
@@ -130,4 +137,5 @@ public class Task {
                 ", startTime=" + startTime +
                 '}';
     }
+
 }
