@@ -1,10 +1,11 @@
+import manager.InMemoryTaskManager;
 import manager.RuntimeEnumerationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class InMemoryTaskManagerTest extends TaskManagerTest {
+public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
 
     @Test
     public void shouldAssignStartField() {

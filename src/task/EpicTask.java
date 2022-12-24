@@ -22,6 +22,10 @@ public class EpicTask extends Task {
 
     }
 
+    public EpicTask(int id, Status status, Duration duration, ZonedDateTime startTime) {
+        super(id, status, duration, startTime);
+    }
+
     public void setEndTime(ZonedDateTime zonedDateTime) {
         this.endTime = zonedDateTime;
     }

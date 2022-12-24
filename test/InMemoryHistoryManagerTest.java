@@ -1,4 +1,4 @@
-import manager.TaskManager;
+import manager.HistoryManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,73 +11,65 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
-import static util.Managers.getDefault;
 import static util.CreationOfTime.zoneId;
+import static util.Managers.getDefaultHistory;
 
 public class InMemoryHistoryManagerTest {
     private Task task;
     private EpicTask epicTask;
     private SubTask subTask;
-    private TaskManager manager1;
+    private HistoryManager manager;
 
     @BeforeEach
     public void createTaskAndHistoryManager() {
-        manager1 = getDefault();
+        manager = getDefaultHistory();
         Duration duration = Duration.ofHours(44);
         Duration duration1 = Duration.ofHours(34);
         ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 02, 12, 34), zoneId);
         ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 12, 10, 40), zoneId);
-        task = new Task(Status.NEW, duration, zonedDateTime);
-        epicTask = new EpicTask(Status.NEW, duration, zonedDateTime);
-        subTask = new SubTask(Status.IN_PROGRESS, duration1, zonedDateTime1, 2);
-        manager1.addTask(task);
-        manager1.addEpicTask(epicTask);
-        manager1.addSubTask(subTask);
-        manager1.getTask(task.getIdTask());
-        manager1.getEpicTask(epicTask.getIdTask());
-        manager1.getSubTask(subTask.getIdTask());
-
+        task = new Task(1, Status.NEW, duration, zonedDateTime);
+        epicTask = new EpicTask(2, Status.NEW, duration, zonedDateTime);
+        subTask = new SubTask(3, Status.IN_PROGRESS, duration1, zonedDateTime1, 2);
+        manager.add(task);
+        manager.add(epicTask);
+        manager.add(subTask);
     }
 
     @Test
     public void shouldReturnEmptyHistoryListIfHistoryEmpty() {
-        Task[] listTask = {};
-        manager1.removeTask(task);
-        manager1.removeEpicTask(epicTask);
-        manager1.removeSubTask(subTask);
+        manager.remove(task.getIdTask());
+        manager.remove(epicTask.getIdTask());
+        manager.remove(subTask.getIdTask());
 
-        Assertions.assertArrayEquals(listTask, manager1.getHistory().toArray());
+        Assertions.assertEquals(0, manager.getHistory().size());
     }
 
     @Test
-    public void shouldReturnHistoryListWithoutDouble() {
-        manager1.getTask(task.getIdTask());
-        Task[] listTask = {epicTask, subTask, task};
+    public void shouldReturnHistoryListWithoutDuplicate() {
+        manager.add(task);
 
-        Assertions.assertArrayEquals(listTask, manager1.getHistory().toArray());
+        Assertions.assertEquals(3, manager.getHistory().size());
     }
 
     @Test
     public void shouldReturnHistoryListWithoutFirstTask() {
-        Task[] listTask = {epicTask, subTask};
-        manager1.removeTask(task);
+        manager.remove(task.getIdTask());
 
-        Assertions.assertArrayEquals(listTask, manager1.getHistory().toArray());
+        Assertions.assertEquals(2, manager.getHistory().size());
     }
 
     @Test
     public void shouldReturnHistoryListWithoutMiddleTask() {
-        Task[] listTask = {task};
-        manager1.removeEpicTask(epicTask);
 
-        Assertions.assertArrayEquals(listTask, manager1.getHistory().toArray());
+        manager.remove(epicTask.getIdTask());
+
+        Assertions.assertEquals(2, manager.getHistory().size());
     }
 
     @Test
     public void shouldReturnHistoryListWithoutLastTask() {
-        Task[] listTask = {epicTask, subTask};
-        manager1.removeTask(task);
+        manager.remove(task.getIdTask());
 
-        Assertions.assertArrayEquals(listTask, manager1.getHistory().toArray());
+        Assertions.assertEquals(2, manager.getHistory().size());
     }
 }

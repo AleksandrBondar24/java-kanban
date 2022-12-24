@@ -15,7 +15,7 @@ import static task.Type.EPICTASK;
 
 import static util.CreationOfTime.*;
 
-public abstract class TaskManagerTest {
+public abstract class TaskManagerTest<T extends TaskManager> {
     protected TaskManager manager;
     protected EpicTask epicTask;
     protected EpicTask epicTask1;
@@ -237,44 +237,41 @@ public abstract class TaskManagerTest {
 
     @Test
     public void shouldReturnAListOfTasks() {
-        Task[] listTask = {task, task1};
 
-        Assertions.assertArrayEquals(listTask, manager.getListTasks().toArray());
+        Assertions.assertEquals(2, manager.getListTasks().size());
     }
 
     @Test
     public void shouldReturnAListOfEpic() {
-        EpicTask[] listTask = {epicTask, epicTask1};
 
-        Assertions.assertArrayEquals(listTask, manager.getListEpicTasks().toArray());
+        Assertions.assertEquals(2, manager.getListEpicTasks().size());
     }
 
     @Test
     public void shouldReturnAListOfSubTask() {
-        SubTask[] listTask = {subTask, subTask1};
 
-        Assertions.assertArrayEquals(listTask, manager.getListSubTasks().toArray());
+        Assertions.assertEquals(2, manager.getListSubTasks().size());
     }
 
     @Test
     public void shouldReturnEmptyAListOfTasks() {
-        Task[] listTask = {};
         manager.clearTasks();
-        Assertions.assertArrayEquals(listTask, manager.getListTasks().toArray());
+
+        Assertions.assertEquals(0, manager.getListTasks().size());
     }
 
     @Test
     public void shouldReturnEmptyAListOfEpic() {
-        EpicTask[] listTask = {};
         manager.clearEpicTasks();
-        Assertions.assertArrayEquals(listTask, manager.getListEpicTasks().toArray());
+
+        Assertions.assertEquals(0, manager.getListEpicTasks().size());
     }
 
     @Test
     public void shouldReturnEmptyAListOfSubTask() {
-        SubTask[] listTask = {};
         manager.clearSubTasks();
-        Assertions.assertArrayEquals(listTask, manager.getListSubTasks().toArray());
+
+        Assertions.assertEquals(0, manager.getListSubTasks().size());
     }
 
     @Test

@@ -1,3 +1,4 @@
+import manager.FileBackedTaskManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import static task.Type.EPICTASK;
 import static util.Managers.getDefault;
 import static util.CreationOfTime.*;
 
-public class FileBackedTaskManagerTest extends TaskManagerTest {
+public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
     private File file = new File("taskManagerTest1.csv");
 
     @Test
