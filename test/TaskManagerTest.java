@@ -3,10 +3,7 @@ import manager.TaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import task.EpicTask;
-import task.Status;
-import task.SubTask;
-import task.Task;
+import task.*;
 import util.Managers;
 
 import java.time.Duration;
@@ -14,17 +11,18 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
-import static util.СreationOfTime.*;
+import static task.Type.EPICTASK;
 
-public abstract class TaskManagerTest<T extends TaskManager> {
+import static util.CreationOfTime.*;
 
-    private TaskManager manager;
-    private EpicTask epicTask;
-    private EpicTask epicTask1;
-    private Task task;
-    private Task task1;
-    private SubTask subTask;
-    private SubTask subTask1;
+public abstract class TaskManagerTest {
+    protected TaskManager manager;
+    protected EpicTask epicTask;
+    protected EpicTask epicTask1;
+    protected Task task;
+    protected Task task1;
+    protected SubTask subTask;
+    protected SubTask subTask1;
 
     @BeforeEach
     public void createTaskAndManager() {
@@ -39,8 +37,8 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 8, 11, 10, 40), zoneId);
         task = new Task(Status.NEW, duration, zonedDateTime);
         task1 = new Task(Status.IN_PROGRESS, duration1, zonedDateTime1);
-        epicTask = new EpicTask(Status.NEW, defaultDuration, defaultStartTime);
-        epicTask1 = new EpicTask(Status.NEW,defaultDuration ,defaultStartTime );
+        epicTask = new EpicTask(-1, EPICTASK, "1Epic", Status.NEW, "okk", defaultStartTime, defaultDuration);
+        epicTask1 = new EpicTask(Status.NEW, defaultDuration, defaultStartTime);
         subTask = new SubTask(Status.IN_PROGRESS, duration2, zonedDateTime2, 3);
         subTask1 = new SubTask(Status.NEW, duration3, zonedDateTime3, 3);
         manager.addTask(task);
@@ -173,7 +171,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnATask() {
-        Map<Integer, Task> tasks1 = manager.getTasks();
         int id = task.getIdTask();
 
         Assertions.assertEquals(task, manager.getTask(id));
@@ -182,7 +179,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnNullIfListTasksEmpty() {
         manager.clearTasks();
-        Map<Integer, Task> tasks1 = manager.getTasks();
         int id = task.getIdTask();
 
         Assertions.assertNull(manager.getTask(id));
@@ -190,7 +186,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnNullIfIdTaskIncorrect() {
-        Map<Integer, Task> tasks1 = manager.getTasks();
         int id = 999;
 
         Assertions.assertNull(manager.getTask(id));
@@ -198,7 +193,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnAEpicTask() {
-        Map<Integer, EpicTask> tasks1 = manager.getEpicTasks();
         int id = epicTask.getIdTask();
 
         Assertions.assertEquals(epicTask, manager.getEpicTask(id));
@@ -207,7 +201,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnNullIfListEpicsEmpty() {
         manager.clearEpicTasks();
-        Map<Integer, EpicTask> tasks1 = manager.getEpicTasks();
         int id = epicTask.getIdTask();
 
         Assertions.assertNull(manager.getEpicTask(id));
@@ -215,7 +208,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnNullIfIdEpicIncorrect() {
-        Map<Integer, EpicTask> tasks1 = manager.getEpicTasks();
         int id = 999;
 
         Assertions.assertNull(manager.getEpicTask(id));
@@ -223,7 +215,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnASubTask() {
-        Map<Integer, SubTask> tasks1 = manager.getSubTasks();
         int id = subTask.getIdTask();
 
         Assertions.assertEquals(subTask, manager.getSubTask(id));
@@ -232,7 +223,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnNullIfListSubTaskEmpty() {
         manager.clearSubTasks();
-        Map<Integer, SubTask> tasks1 = manager.getSubTasks();
         int id = subTask.getIdTask();
 
         Assertions.assertNull(manager.getSubTask(id));
@@ -240,7 +230,6 @@ public abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     public void shouldReturnNullIfIdSubTaskIncorrect() {
-        Map<Integer, SubTask> tasks1 = manager.getSubTasks();
         int id = 999;
 
         Assertions.assertNull(manager.getSubTask(id));

@@ -1,5 +1,3 @@
-import manager.HistoryManager;
-import manager.InMemoryTaskManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,22 +10,18 @@ import task.Task;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import static util.Managers.getDefault;
-import static util.Managers.getDefaultHistory;
-import static util.СreationOfTime.zoneId;
+import static util.CreationOfTime.zoneId;
 
 public class InMemoryHistoryManagerTest {
     private Task task;
     private EpicTask epicTask;
     private SubTask subTask;
-    private HistoryManager manager;
     private TaskManager manager1;
 
     @BeforeEach
     public void createTaskAndHistoryManager() {
-        manager = getDefaultHistory();
         manager1 = getDefault();
         Duration duration = Duration.ofHours(44);
         Duration duration1 = Duration.ofHours(34);

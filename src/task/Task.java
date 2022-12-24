@@ -2,10 +2,10 @@ package task;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Objects;
 
-import static util.СreationOfTime.*;
+import static util.CreationOfTime.*;
 
 public class Task {
 
@@ -56,13 +56,12 @@ public class Task {
         this.startTime = startTime;
         this.duration = duration;
     }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setDuration(long hours) {
+        this.duration = Duration.ofHours(hours);
     }
 
-    public void setStartTime(int year, int month, int day, int hours, int minutes) {
-        this.startTime = ZonedDateTime.of(LocalDateTime.of(year, month, day, hours, minutes), zoneId);
+    public void setStartTime(ZonedDateTime zonedDateTime) {
+        this.startTime = zonedDateTime;
     }
 
     public ZonedDateTime getStartTime() {
@@ -121,8 +120,18 @@ public class Task {
         return epicTaskId;
     }
 
-    public void setEpicTaskId(int epictaskId) {
-        this.epicTaskId = epicTaskId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return idTask == task.idTask && Objects.equals(nameTask, task.nameTask) && Objects.equals(descriptionTask, task.descriptionTask) && type == task.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTask, nameTask, descriptionTask, type);
     }
 
     @Override

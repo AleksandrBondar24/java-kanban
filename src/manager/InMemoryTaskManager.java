@@ -6,8 +6,8 @@ import util.Managers;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-import static util.СreationOfTime.defaultDuration;
-import static util.СreationOfTime.defaultStartTime;
+import static util.CreationOfTime.defaultDuration;
+import static util.CreationOfTime.defaultStartTime;
 
 public class InMemoryTaskManager implements TaskManager {
     private int id = 1;
@@ -288,7 +288,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     public void setDurationEpic(EpicTask task) {
         if (task.getListSubTaskIds().isEmpty()) {
-            task.setDuration(defaultDuration);
+            task.setDuration(defaultDuration.toHours());
             return;
         }
         long hours = task.getListSubTaskIds().stream().mapToLong(id -> subTasks.get(id).getDuration().toHours()).sum();

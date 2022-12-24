@@ -1,4 +1,3 @@
-
 import manager.TaskManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,18 +12,18 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 import static task.Status.*;
-import static util.СreationOfTime.zoneId;
+import static util.CreationOfTime.zoneId;
 
 
 class EpicTest {
     private TaskManager manager;
     private EpicTask task;
-    Duration duration;
-    Duration duration1;
-    Duration duration2;
-    ZonedDateTime zonedDateTime;
-    ZonedDateTime zonedDateTime1;
-    ZonedDateTime zonedDateTime2;
+    private Duration duration;
+    private Duration duration1;
+    private Duration duration2;
+    private ZonedDateTime zonedDateTime;
+    private ZonedDateTime zonedDateTime1;
+    private ZonedDateTime zonedDateTime2;
 
     @BeforeEach
     public void createEpicAndManager() {

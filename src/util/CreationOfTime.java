@@ -6,7 +6,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class СreationOfTime {
+public class CreationOfTime {
     public static final ZoneId zoneId = ZoneId.of("Europe/Moscow");
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd | HH:mm | ZZZZZ VV");
     public static final ZonedDateTime defaultStartTime = ZonedDateTime.of
