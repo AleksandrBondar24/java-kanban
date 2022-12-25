@@ -49,6 +49,10 @@ public class InMemoryTaskManager implements TaskManager {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public List<Task> getHistory() {
         return history.getHistory();
@@ -109,7 +113,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void clearTasks() {
-        for(Task task : tasks.values()) {
+        for (Task task : tasks.values()) {
             prioritizedTasks.remove(task.getStartTime());
         }
         tasks.clear();
@@ -123,7 +127,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void clearSubTasks() {
-        for(SubTask subTask : subTasks.values()) {
+        for (SubTask subTask : subTasks.values()) {
             prioritizedTasks.remove(subTask.getStartTime());
         }
         subTasks.clear();

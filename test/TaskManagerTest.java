@@ -11,8 +11,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Map;
 
-import static task.Type.EPICTASK;
-
+import static task.Type.*;
 import static util.CreationOfTime.*;
 
 public abstract class TaskManagerTest<T extends TaskManager> {
@@ -25,8 +24,12 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     protected SubTask subTask1;
 
     @BeforeEach
-    public void createTaskAndManager() {
+    public void createManager() {
         manager = Managers.getDefault();
+    }
+
+    @BeforeEach
+    public void createTask() {
         Duration duration = Duration.ofHours(44);
         Duration duration1 = Duration.ofHours(34);
         Duration duration2 = Duration.ofHours(44);
@@ -35,12 +38,12 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 10, 12, 10, 40), zoneId);
         ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDateTime.of(2022, 9, 10, 12, 34), zoneId);
         ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 8, 11, 10, 40), zoneId);
-        task = new Task(Status.NEW, duration, zonedDateTime);
-        task1 = new Task(Status.IN_PROGRESS, duration1, zonedDateTime1);
+        task = new Task(-1, TASK, "Tz1", Status.NEW, "okk", zonedDateTime, duration);
+        task1 = new Task(-1, TASK, "Tz2", Status.IN_PROGRESS, "okk", zonedDateTime1, duration1);
         epicTask = new EpicTask(-1, EPICTASK, "1Epic", Status.NEW, "okk", defaultStartTime, defaultDuration);
-        epicTask1 = new EpicTask(Status.NEW, defaultDuration, defaultStartTime);
-        subTask = new SubTask(Status.IN_PROGRESS, duration2, zonedDateTime2, 3);
-        subTask1 = new SubTask(Status.NEW, duration3, zonedDateTime3, 3);
+        epicTask1 = new EpicTask(-1, EPICTASK, "2Epic", Status.NEW, "okk", defaultStartTime, defaultDuration);
+        subTask = new SubTask(-1, SUBTASK, "ep", Status.IN_PROGRESS, "okk", zonedDateTime2, duration2, 3);
+        subTask1 = new SubTask(-1, SUBTASK, "ep", Status.NEW, "okk", zonedDateTime3, duration3, 3);
         manager.addTask(task);
         manager.addTask(task1);
         manager.addEpicTask(epicTask);

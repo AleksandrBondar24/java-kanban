@@ -29,7 +29,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task.setNameTask("TZ");
         task.setStatus(Status.NEW);
         task.setDescriptionTask("закончить ТЗ");
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 16, 01, 01),zoneId);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 16, 01, 01), zoneId);
         task.setStartTime(zonedDateTime);
         task.setDuration(56);
         manager.addTask(task);
@@ -40,7 +40,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task2.setNameTask("TZ2");
         task2.setStatus(Status.NEW);
         task2.setDescriptionTask("закончить ТЗ4");
-        ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 16, 01, 01),zoneId);
+        ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 16, 01, 01), zoneId);
         task2.setStartTime(zonedDateTime1);
         task2.setDuration(44);
         manager.addTask(task2);
@@ -59,7 +59,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask.setStatus(Status.DONE);
         subTask.setDescriptionTask("закончить ТЗ27");
         subTask.setEpicTaskId(epicTask.getIdTask());
-        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDateTime.of(2022, 10, 16, 01, 01),zoneId);
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDateTime.of(2022, 10, 16, 01, 01), zoneId);
         subTask.setStartTime(zonedDateTime2);
         subTask.setDuration(40);
         manager.addSubTask(subTask);
@@ -72,7 +72,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask1.setStatus(Status.NEW);
         subTask1.setDescriptionTask("закончить ТЗ278");
         subTask1.setEpicTaskId(epicTask.getIdTask());
-        ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 9, 15, 01, 01),zoneId);
+        ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 9, 15, 01, 01), zoneId);
         subTask1.setStartTime(zonedDateTime3);
         subTask1.setDuration(38);
         manager.addSubTask(subTask1);
@@ -84,7 +84,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task3.setNameTask("TZ6");
         task3.setStatus(Status.NEW);
         task3.setDescriptionTask("закончить ТЗ6");
-        ZonedDateTime zonedDateTime4 = ZonedDateTime.of(LocalDateTime.of(2022, 5, 11, 01, 01),zoneId);
+        ZonedDateTime zonedDateTime4 = ZonedDateTime.of(LocalDateTime.of(2022, 5, 11, 01, 01), zoneId);
         task3.setStartTime(zonedDateTime4);
         task3.setDuration(49);
         manager.addTask(task3);
@@ -231,23 +231,29 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     @Override
     public String removeTask(Task task) {
-        super.removeTask(task);
-        save();
-        return "Задача успешно удалена!";
+        String message = super.removeTask(task);
+        if (message.equals("Задача успешно удалена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String removeEpicTask(EpicTask task) {
-        super.removeEpicTask(task);
-        save();
-        return "Задача успешно удалена!";
+        String message = super.removeEpicTask(task);
+        if (message.equals("Задача успешно удалена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String removeSubTask(SubTask task) {
-        super.removeSubTask(task);
-        save();
-        return "Задача успешно удалена!";
+        String message = super.removeSubTask(task);
+        if (message.equals("Задача успешно удалена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
@@ -270,43 +276,55 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     @Override
     public String addTask(Task task) {
-        super.addTask(task);
-        save();
-        return "Задача успешно добавлена!";
+        String message = super.addTask(task);
+        if (message.equals("Задача успешно добавлена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String addEpicTask(EpicTask task) {
-        super.addEpicTask(task);
-        save();
-        return "Эпикзадача успешно добавлена!";
+        String message = super.addEpicTask(task);
+        if (message.equals("Эпикзадача успешно добавлена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String addSubTask(SubTask task) {
-        super.addSubTask(task);
-        save();
-        return "Отсутствует эпик для этой подзадачи!";
+        String message = super.addSubTask(task);
+        if (message.equals("Подзадача успешно добавлена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String updateEpicTasks(EpicTask task) {
-        super.updateEpicTasks(task);
-        save();
-        return "Задача успешно обновлена!";
+        String message = super.updateEpicTasks(task);
+        if (message.equals("Задача успешно обновлена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String updateTasks(Task task) {
-        super.updateTasks(task);
-        save();
-        return "Задача успешно обновлена!";
+        String message = super.updateTasks(task);
+        if (message.equals("Задача успешно обновлена!")) {
+            save();
+        }
+        return message;
     }
 
     @Override
     public String updateSubTasks(SubTask task) {
-        super.updateSubTasks(task);
-        save();
-        return "Задача успешно обновлена!";
+        String message = super.updateSubTasks(task);
+        if (message.equals("Задача успешно обновлена!")) {
+            save();
+        }
+        return message;
     }
 }

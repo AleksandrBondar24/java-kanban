@@ -1,9 +1,9 @@
 id,type,name,status,description,startTime,duration,epic
-1,TASK,TZ,NEW,закончить ТЗ,2022.12.16 | 01:01 | +03:00 Europe/Moscow,PT56H
-2,TASK,TZ2,NEW,закончить ТЗ4,2022.11.16 | 01:01 | +03:00 Europe/Moscow,PT44H
-6,TASK,TZ6,NEW,закончить ТЗ6,2022.05.11 | 01:01 | +03:00 Europe/Moscow,PT49H
-3,EPICTASK,TZ2,IN_PROGRESS,закончить ТЗ5,2022.09.15 | 01:01 | +03:00 Europe/Moscow,PT78H
-4,SUBTASK,TZ3,DONE,закончить ТЗ27,2022.10.16 | 01:01 | +03:00 Europe/Moscow,PT40H,3
-5,SUBTASK,TZ3,NEW,закончить ТЗ278,2022.09.15 | 01:01 | +03:00 Europe/Moscow,PT38H,3
+1,TASK,Tz1,NEW,okk,2022.12.22 | 12:34 | +03:00 Europe/Moscow,PT44H
+2,TASK,Tz2,IN_PROGRESS,okk,2022.10.12 | 10:40 | +03:00 Europe/Moscow,PT34H
+3,EPICTASK,1Epic,IN_PROGRESS,okk,2022.08.11 | 10:40 | +03:00 Europe/Moscow,PT78H
+4,EPICTASK,2Epic,NEW,okk,3000.01.01 | 01:01 | +03:00 Europe/Moscow,PT0S
+5,SUBTASK,ep,IN_PROGRESS,okk,2022.09.10 | 12:34 | +03:00 Europe/Moscow,PT44H,3
+6,SUBTASK,ep,NEW,okk,2022.08.11 | 10:40 | +03:00 Europe/Moscow,PT34H,3
 
-2,4,5,3,6,1
+1,3,5

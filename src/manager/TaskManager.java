@@ -61,6 +61,8 @@ public interface TaskManager {
     void setDurationEpic(EpicTask epicTask);
 
     void checkIntersections(Task task1);
+
+    int getId();
 }
 
 
