@@ -25,7 +25,7 @@ public class InMemoryHistoryManagerTest {
         manager = getDefaultHistory();
         Duration duration = Duration.ofHours(44);
         Duration duration1 = Duration.ofHours(34);
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 02, 12, 34), zoneId);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 2, 12, 34), zoneId);
         ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 12, 10, 40), zoneId);
         task = new Task(1, Status.NEW, duration, zonedDateTime);
         epicTask = new EpicTask(2, Status.NEW, duration, zonedDateTime);
@@ -60,7 +60,6 @@ public class InMemoryHistoryManagerTest {
 
     @Test
     public void shouldReturnHistoryListWithoutMiddleTask() {
-
         manager.remove(epicTask.getIdTask());
 
         Assertions.assertEquals(2, manager.getHistory().size());

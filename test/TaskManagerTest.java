@@ -44,17 +44,11 @@ public abstract class TaskManagerTest<T extends TaskManager> {
         epicTask1 = new EpicTask(-1, EPICTASK, "2Epic", Status.NEW, "okk", defaultStartTime, defaultDuration);
         subTask = new SubTask(-1, SUBTASK, "ep", Status.IN_PROGRESS, "okk", zonedDateTime2, duration2, 3);
         subTask1 = new SubTask(-1, SUBTASK, "ep", Status.NEW, "okk", zonedDateTime3, duration3, 3);
-        manager.addTask(task);
-        manager.addTask(task1);
-        manager.addEpicTask(epicTask);
-        manager.addEpicTask(epicTask1);
-        manager.addSubTask(subTask);
-        manager.addSubTask(subTask1);
     }
 
     @Test
     public void shouldDeleteTheTaskTrue() {
-        manager.removeTask(task);
+        manager.removeTask(1);
         Map<Integer, Task> tasks1 = manager.getTasks();
 
         Assertions.assertFalse(tasks1.containsKey(task.getIdTask()));
@@ -63,7 +57,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnMessageIfTheListTaskIsEmpty() {
         manager.clearTasks();
-        String message = manager.removeTask(task);
+        String message = manager.removeTask(1);
 
         Assertions.assertEquals("Задачи для удаления не существует!", message);
     }
@@ -72,14 +66,14 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     public void shouldReturnMessageIfInvalidTaskId() {
         Task task1 = new Task();
         task1.setIdTask(999);
-        String message = manager.removeTask(task1);
+        String message = manager.removeTask(task1.getIdTask());
 
         Assertions.assertEquals("Неверный идентификатор задачи", message);
     }
 
     @Test
     public void shouldDeleteTheEpicTrue() {
-        manager.removeEpicTask(epicTask);
+        manager.removeEpicTask(3);
         Map<Integer, EpicTask> tasks1 = manager.getEpicTasks();
 
         Assertions.assertFalse(tasks1.containsKey(epicTask.getIdTask()));
@@ -88,7 +82,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnMessageIfTheListEpicIsEmpty() {
         manager.clearEpicTasks();
-        String message = manager.removeEpicTask(epicTask);
+        String message = manager.removeEpicTask(3);
 
         Assertions.assertEquals("Задачи для удаления не существует!", message);
     }
@@ -97,14 +91,14 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     public void shouldReturnMessageIfInvalidEpicId() {
         EpicTask task1 = new EpicTask();
         task1.setIdTask(999);
-        String message = manager.removeEpicTask(task1);
+        String message = manager.removeEpicTask(task1.getIdTask());
 
         Assertions.assertEquals("Неверный идентификатор задачи", message);
     }
 
     @Test
     public void shouldDeleteTheSubTaskTrue() {
-        manager.removeSubTask(subTask);
+        manager.removeSubTask(subTask.getIdTask());
         Map<Integer, SubTask> tasks1 = manager.getSubTasks();
 
         Assertions.assertFalse(tasks1.containsKey(subTask.getIdTask()));
@@ -113,7 +107,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     @Test
     public void shouldReturnMessageIfTheListSubTaskIsEmpty() {
         manager.clearSubTasks();
-        String message = manager.removeSubTask(subTask);
+        String message = manager.removeSubTask(5);
 
         Assertions.assertEquals("Задачи для удаления не существует!", message);
     }
@@ -122,7 +116,7 @@ public abstract class TaskManagerTest<T extends TaskManager> {
     public void shouldReturnMessageIfInvalidSubTaskId() {
         SubTask task1 = new SubTask();
         task1.setIdTask(999);
-        String message = manager.removeSubTask(task1);
+        String message = manager.removeSubTask(task1.getIdTask());
 
         Assertions.assertEquals("Неверный идентификатор задачи", message);
     }

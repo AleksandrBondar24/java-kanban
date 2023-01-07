@@ -10,11 +10,11 @@ import java.util.Map;
 public interface TaskManager {
     List<Task> getHistory();
 
-    String removeTask(Task task);
+    String removeTask(int id);
 
-    String removeEpicTask(EpicTask task);
+    String removeEpicTask(int id);
 
-    String removeSubTask(SubTask task);
+    String removeSubTask(int id);
 
     void clearTasks();
 
@@ -64,5 +64,6 @@ public interface TaskManager {
 
     int getId();
 }
+
 
 

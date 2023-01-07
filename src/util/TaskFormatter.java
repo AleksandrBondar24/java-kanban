@@ -18,6 +18,11 @@ public class TaskFormatter {
             return task.getIdTask() + "," + task.getType() + "," + task.getNameTask() + "," + task.getStatus() + ","
                     + task.getDescriptionTask() + "," + task.getStartTime().format(formatter) + "," + task.getDuration();
         }
+        SubTask task1 = (SubTask) task;
+        return toStringSubtask(task1);
+    }
+
+    public static String toStringSubtask(SubTask task) {
         return task.getIdTask() + "," + task.getType() + "," + task.getNameTask() + "," + task.getStatus() + ","
                 + task.getDescriptionTask() + "," + task.getStartTime().format(formatter) + "," + task.getDuration() + "," + task.getEpicTaskId();
     }
@@ -38,13 +43,16 @@ public class TaskFormatter {
         Duration duration = Duration.parse((tasks[6]));
 
         switch (type) {
-            case TASK:
+            case TASK -> {
                 return new Task(idTask, type, name, status, description, startTime, duration);
-            case EPICTASK:
+            }
+            case EPICTASK -> {
                 return new EpicTask(idTask, type, name, status, description, startTime, duration);
-            case SUBTASK:
+            }
+            case SUBTASK -> {
                 int idEpic = Integer.parseInt(tasks[7]);
                 return new SubTask(idTask, type, name, status, description, startTime, duration, idEpic);
+            }
         }
         return null;
     }

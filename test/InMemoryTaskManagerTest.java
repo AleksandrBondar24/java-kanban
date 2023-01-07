@@ -11,6 +11,12 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
     public void setUp() {
         manager = new InMemoryTaskManager();
         createTask();
+        manager.addTask(task);
+        manager.addTask(task1);
+        manager.addEpicTask(epicTask);
+        manager.addEpicTask(epicTask1);
+        manager.addSubTask(subTask);
+        manager.addSubTask(subTask1);
     }
 
     @Test
@@ -42,7 +48,6 @@ public class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager
 
     @Test
     public void shouldThrowExceptionOnIntersection() {
-
         final RuntimeEnumerationException exception = assertThrows(RuntimeEnumerationException.class,
                 () -> manager.checkIntersections(task1));
         Assertions.assertEquals("Ошибка пересечения времени выполения задачи!Выберите новое время.",

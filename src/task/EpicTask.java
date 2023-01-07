@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class EpicTask extends Task {
     private final List<Integer> subTaskIds = new ArrayList<>();
-    private ZonedDateTime endTime;
+    protected ZonedDateTime endTime;
 
     public EpicTask() {
     }

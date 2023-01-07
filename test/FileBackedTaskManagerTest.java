@@ -17,12 +17,18 @@ import static util.Managers.getDefault;
 import static util.CreationOfTime.*;
 
 public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
-    private File file = new File("taskManager.csv");
+    private final File file = new File("taskManager.csv");
 
     @BeforeEach
     public void setUp() {
         manager = new FileBackedTaskManager(file);
         createTask();
+        manager.addTask(task);
+        manager.addTask(task1);
+        manager.addEpicTask(epicTask);
+        manager.addEpicTask(epicTask1);
+        manager.addSubTask(subTask);
+        manager.addSubTask(subTask1);
     }
 
     @Test

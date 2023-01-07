@@ -1,7 +1,6 @@
 package task;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -14,7 +13,6 @@ public class Task {
     private Status status;
     private String descriptionTask;
     private Type type;
-    private int epicTaskId;
     private Duration duration = defaultDuration;
     private ZonedDateTime startTime = defaultStartTime;
 
@@ -56,6 +54,7 @@ public class Task {
         this.startTime = startTime;
         this.duration = duration;
     }
+
     public void setDuration(long hours) {
         this.duration = Duration.ofHours(hours);
     }
@@ -116,11 +115,6 @@ public class Task {
         this.type = type;
     }
 
-    public int getEpicTaskId() {
-        return epicTaskId;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,5 +140,4 @@ public class Task {
                 ", startTime=" + startTime +
                 '}';
     }
-
 }

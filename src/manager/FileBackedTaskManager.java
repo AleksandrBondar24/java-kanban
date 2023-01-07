@@ -18,6 +18,9 @@ import java.util.List;
 import static util.CreationOfTime.zoneId;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
+    public FileBackedTaskManager() {
+    }
+
     public static void main(String[] args) {
 
         File file = new File("taskManager.csv");
@@ -29,7 +32,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task.setNameTask("TZ");
         task.setStatus(Status.NEW);
         task.setDescriptionTask("закончить ТЗ");
-        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 16, 01, 01), zoneId);
+        ZonedDateTime zonedDateTime = ZonedDateTime.of(LocalDateTime.of(2022, 12, 16, 1, 1), zoneId);
         task.setStartTime(zonedDateTime);
         task.setDuration(56);
         manager.addTask(task);
@@ -40,7 +43,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task2.setNameTask("TZ2");
         task2.setStatus(Status.NEW);
         task2.setDescriptionTask("закончить ТЗ4");
-        ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 16, 01, 01), zoneId);
+        ZonedDateTime zonedDateTime1 = ZonedDateTime.of(LocalDateTime.of(2022, 11, 16, 1, 1), zoneId);
         task2.setStartTime(zonedDateTime1);
         task2.setDuration(44);
         manager.addTask(task2);
@@ -59,7 +62,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask.setStatus(Status.DONE);
         subTask.setDescriptionTask("закончить ТЗ27");
         subTask.setEpicTaskId(epicTask.getIdTask());
-        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDateTime.of(2022, 10, 16, 01, 01), zoneId);
+        ZonedDateTime zonedDateTime2 = ZonedDateTime.of(LocalDateTime.of(2022, 10, 16, 1, 1), zoneId);
         subTask.setStartTime(zonedDateTime2);
         subTask.setDuration(40);
         manager.addSubTask(subTask);
@@ -72,7 +75,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         subTask1.setStatus(Status.NEW);
         subTask1.setDescriptionTask("закончить ТЗ278");
         subTask1.setEpicTaskId(epicTask.getIdTask());
-        ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 9, 15, 01, 01), zoneId);
+        ZonedDateTime zonedDateTime3 = ZonedDateTime.of(LocalDateTime.of(2022, 9, 15, 1, 1), zoneId);
         subTask1.setStartTime(zonedDateTime3);
         subTask1.setDuration(38);
         manager.addSubTask(subTask1);
@@ -84,7 +87,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         task3.setNameTask("TZ6");
         task3.setStatus(Status.NEW);
         task3.setDescriptionTask("закончить ТЗ6");
-        ZonedDateTime zonedDateTime4 = ZonedDateTime.of(LocalDateTime.of(2022, 5, 11, 01, 01), zoneId);
+        ZonedDateTime zonedDateTime4 = ZonedDateTime.of(LocalDateTime.of(2022, 5, 11, 1, 1), zoneId);
         task3.setStartTime(zonedDateTime4);
         task3.setDuration(49);
         manager.addTask(task3);
@@ -110,11 +113,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     }
 
-    private final File file;
+    private File file;
 
     public FileBackedTaskManager(File file) {
         this.file = file;
     }
+
 
     public static FileBackedTaskManager loadFromFile(File file) {
 
@@ -137,17 +141,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 assert task != null;
                 Type type = task.getType();
                 switch (type) {
-                    case TASK:
+                    case TASK -> {
                         fileManager.tasks.put(task.getIdTask(), task);
                         fileManager.prioritizedTasks.put(task.getStartTime(), task);
-                        break;
-                    case EPICTASK:
-                        fileManager.epicTasks.put(task.getIdTask(), (EpicTask) task);
-                        break;
-                    case SUBTASK:
+                    }
+                    case EPICTASK -> fileManager.epicTasks.put(task.getIdTask(), (EpicTask) task);
+                    case SUBTASK -> {
                         fileManager.subTasks.put(task.getIdTask(), (SubTask) task);
                         fileManager.prioritizedTasks.put(task.getStartTime(), task);
-                        break;
+                    }
                 }
 
                 if (task.getIdTask() > id) {
@@ -230,8 +232,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public String removeTask(Task task) {
-        String message = super.removeTask(task);
+    public String removeTask(int id) {
+        String message = super.removeTask(id);
         if (message.equals("Задача успешно удалена!")) {
             save();
         }
@@ -239,8 +241,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public String removeEpicTask(EpicTask task) {
-        String message = super.removeEpicTask(task);
+    public String removeEpicTask(int id) {
+        String message = super.removeEpicTask(id);
         if (message.equals("Задача успешно удалена!")) {
             save();
         }
@@ -248,8 +250,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     @Override
-    public String removeSubTask(SubTask task) {
-        String message = super.removeSubTask(task);
+    public String removeSubTask(int id) {
+        String message = super.removeSubTask(id);
         if (message.equals("Задача успешно удалена!")) {
             save();
         }
